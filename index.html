@@ -124,6 +124,24 @@ h3{font-size:19px;margin:0 0 6px;line-height:1.3;font-weight:650}
 .gallery figcaption{font-size:13.5px;color:var(--muted);margin-top:5px;line-height:1.35}
 .empty{border:1.5px dashed var(--line);border-radius:14px;padding:28px;color:var(--muted);text-align:center}
 
+/* rota */
+.rota{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:760px){.rota{grid-template-columns:1fr}}
+.rcard{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;min-width:0}
+.rcard.wide{grid-column:1/-1}
+.rcard h3{margin-bottom:12px}
+.tscroll{overflow-x:auto}
+.rt{width:100%;border-collapse:collapse;font-size:15px;min-width:560px}
+.rt th{text-align:left;font-size:13.5px;color:var(--muted);font-weight:600;padding:6px 10px;border-bottom:2px solid var(--line)}
+.rt td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+.rt tr.today td{background:var(--gold-soft);font-weight:600}
+.miss{color:var(--muted);font-style:italic}
+.rcard .big{font-size:22px;font-weight:700;margin:0 0 4px}
+.ritem{display:grid;grid-template-columns:120px 1fr;gap:12px;padding:8px 0;border-top:1px solid var(--line)}
+.ritem:first-of-type{border-top:0}
+.ritem time{font-size:14px;color:var(--gold);font-weight:700}
+.pill{display:inline-block;background:var(--stripe-soft);color:var(--ink);border-radius:99px;padding:1px 10px;font-size:14px;font-weight:500}
+@media (max-width:480px){.ritem{grid-template-columns:1fr;gap:2px}}
 /* contact */
 .contact{display:grid;grid-template-columns:1fr 1fr;gap:40px}
 @media (max-width:760px){.contact{grid-template-columns:1fr}}
@@ -216,6 +234,68 @@ function fishSVG(small){
 
 function tel(n){return '<a href="tel:'+esc(String(n).replace(/\s/g,''))+'">'+esc(n)+'</a>'}
 
+var ROTA={status:"idle",data:{},at:null};
+var ROTA_SHEETS=["Lịch lên Trung tâm","Trực cá","Trực nhật","Seminar"];
+var DOW_EN=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+var DOW_VI=["Chủ nhật","Thứ Hai","Thứ Ba","Thứ Tư","Thứ Năm","Thứ Sáu","Thứ Bảy"];
+function sheetIdOf(u){var m=String(u||"").match(/\/d\/([\w-]+)/);return m?m[1]:null}
+function gv(c){return c&&c.v!=null?c.v:null}
+function gt(c){if(!c)return "";if(c.f!=null)return String(c.f);return c.v==null?"":String(c.v)}
+function gdate(c){var v=gv(c);if(typeof v==="string"){var m=v.match(/^Date\((\d+),(\d+),(\d+)/);if(m)return new Date(+m[1],+m[2],+m[3])}return null}
+function day0(d){return new Date(d.getFullYear(),d.getMonth(),d.getDate())}
+function addD(d,n){return new Date(d.getFullYear(),d.getMonth(),d.getDate()+n)}
+function sameD(a,b){return a&&b&&a.getTime()===b.getTime()}
+function dmy(d){return ("0"+d.getDate()).slice(-2)+"/"+("0"+(d.getMonth()+1)).slice(-2)}
+function dowOf(d){return LANG==="en"?DOW_EN[d.getDay()]:DOW_VI[d.getDay()]}
+function cells(r){return (r&&r.c)||[]}
+function jsonp(id,sheet){return new Promise(function(res,rej){
+  var cb="zlabRota"+Math.random().toString(36).slice(2),s=document.createElement("script"),fin=false;
+  function done(){fin=true;clearTimeout(t);try{delete window[cb]}catch(e){window[cb]=undefined}if(s.parentNode)s.parentNode.removeChild(s)}
+  var t=setTimeout(function(){if(!fin){done();rej(new Error("timeout"))}},12000);
+  window[cb]=function(r){if(fin)return;done();if(r&&r.status!=="error"&&r.table)res(r.table);else rej(new Error("gviz"))};
+  s.onerror=function(){if(!fin){done();rej(new Error("load"))}};
+  s.src="https://docs.google.com/spreadsheets/d/"+id+"/gviz/tq?tqx=out:json;responseHandler:"+cb+"&headers=1&sheet="+encodeURIComponent(sheet);
+  document.head.appendChild(s)})}
+function loadRota(){
+  var id=sheetIdOf(cur().settings.scheduleUrl);if(!id||ROTA.status==="loading")return;
+  ROTA.status="loading";
+  Promise.all(ROTA_SHEETS.map(function(n){return jsonp(id,n)})).then(function(ts){
+    ROTA_SHEETS.forEach(function(n,i){ROTA.data[n]=ts[i].rows||[]});ROTA.status="ok";ROTA.at=new Date();paintRota()
+  }).catch(function(){ROTA.status=ROTA.at?"ok":"error";paintRota()})}
+function paintRota(){var el=document.getElementById("rota-live");if(el)el.innerHTML=rotaHTML()}
+function rotaHTML(){
+  var en=LANG==="en";
+  if(ROTA.status==="error")return '<p class="empty">'+(en?"The rota could not be loaded here. Use the button above to open the sheet.":"Chưa tải được lịch trên trang này. Vui lòng bấm nút phía trên để mở bảng tính.")+'</p>';
+  if(!ROTA.at)return '<p class="hint">'+(en?"Loading the rota…":"Đang tải lịch…")+'</p>';
+  var today=day0(new Date()),mon=addD(today,-((today.getDay()+6)%7)),sun=addD(mon,6),end7=addD(today,6),D=ROTA.data,o='<div class="rota">';
+  var none=en?"Not assigned":"Chưa có người";
+  // fish care
+  var fish=(D["Trực cá"]||[]).map(function(r){var c=cells(r);return {d:gdate(c[0]),s:gt(c[2]),a:gt(c[3]),r:gt(c[4]),n:gt(c[5])}}).filter(function(x){return x.d&&x.d>=mon&&x.d<=sun});
+  o+='<div class="rcard wide"><h3>'+(en?"Fish care this week":"Trực cá tuần này")+' <span class="hint">'+dmy(mon)+' – '+dmy(sun)+'</span></h3><div class="tscroll"><table class="rt"><thead><tr><th>'+(en?"Day":"Ngày")+'</th><th>'+(en?"Morning feed":"Cho ăn sáng")+'</th><th>'+(en?"Afternoon feed":"Cho ăn chiều")+'</th><th>'+(en?"Artemia":"Ấp artemia")+'</th><th>'+(en?"Notes":"Ghi chú")+'</th></tr></thead><tbody>';
+  if(!fish.length)o+='<tr><td colspan="5" class="hint">'+(en?"No rows for this week in the sheet.":"Bảng tính chưa có dòng cho tuần này.")+'</td></tr>';
+  fish.forEach(function(x){o+='<tr'+(sameD(x.d,today)?' class="today"':'')+'><td>'+esc(dowOf(x.d))+' '+dmy(x.d)+'</td>'+[x.s,x.a,x.r].map(function(v){return '<td'+(v?'':' class="miss"')+'>'+esc(v||none)+'</td>'}).join("")+'<td>'+esc(x.n)+'</td></tr>'});
+  o+='</tbody></table></div></div>';
+  // cleaning
+  var cl=(D["Trực nhật"]||[]).map(function(r){var c=cells(r);return {a:gdate(c[0]),b:gdate(c[1]),p:gt(c[2]),k:gv(c[3])===true}}).filter(function(x){return x.a&&x.b&&today>=x.a&&today<=x.b})[0];
+  o+='<div class="rcard"><h3>'+(en?"Cleaning duty":"Trực nhật tuần này")+'</h3>'+(cl?'<p class="big'+(cl.p?'':' miss')+'">'+esc(cl.p||none)+'</p><p class="hint">'+dmy(cl.a)+' – '+dmy(cl.b)+(cl.k?(en?" · done":" · đã hoàn thành"):"")+'</p>':'<p class="hint">'+(en?"No row for this week.":"Chưa có dòng cho tuần này.")+'</p>')+'</div>';
+  // seminar
+  var sm=(D["Seminar"]||[]).map(function(r){var c=cells(r);return {d:gdate(c[0]),t:gt(c[1]),p:gt(c[2]),s:gt(c[3]),l:gt(c[4])}}).filter(function(x){return x.d&&x.d>=today}).sort(function(a,b){return a.d-b.d}).slice(0,3);
+  o+='<div class="rcard"><h3>'+(en?"Upcoming seminars":"Seminar sắp tới")+'</h3>';
+  if(!sm.length)o+='<p class="hint">'+(en?"None scheduled.":"Chưa có lịch.")+'</p>';
+  sm.forEach(function(x){var link=/^https?:\/\//.test(x.l)?' · <a href="'+esc(x.l)+'" target="_blank" rel="noopener">'+(en?"reading":"tài liệu")+'</a>':'';o+='<div class="ritem"><time>'+esc(dowOf(x.d))+' '+dmy(x.d)+(x.t?' · '+esc(x.t):'')+'</time><div><b>'+esc(x.p||"—")+'</b>'+(x.s?': '+esc(x.s):'')+link+'</div></div>'});
+  o+='</div>';
+  // lab days
+  var lab=(D["Lịch lên Trung tâm"]||[]).map(function(r){var c=cells(r);return {d:gdate(c[0]),p:gt(c[2]),ca:gt(c[3]),w:gt(c[4]),n:gt(c[5])}}).filter(function(x){return x.d&&x.p&&x.d>=today&&x.d<=end7&&!/ví dụ/i.test(x.n)}).sort(function(a,b){return a.d-b.d||a.p.localeCompare(b.p)});
+  var byDay={};lab.forEach(function(x){var k=x.d.getTime();(byDay[k]=byDay[k]||[]).push(x)});
+  var CA_EN={"Sáng":"AM","Chiều":"PM","Cả ngày":"All day"};
+  o+='<div class="rcard wide"><h3>'+(en?"Lab days, next 7 days":"Lịch lên Trung tâm 7 ngày tới")+'</h3>';
+  var anyLab=false;
+  for(var i=0;i<7;i++){var d=addD(today,i),L=byDay[d.getTime()]||[];if(!L.length)continue;anyLab=true;
+    o+='<div class="ritem"><time>'+esc(dowOf(d))+' '+dmy(d)+'</time><div>'+L.map(function(x){return '<span class="pill">'+esc(x.p)+(x.ca?' · '+esc(en?(CA_EN[x.ca]||x.ca):x.ca):'')+'</span>'+(x.w?'<span class="hint"> '+esc(x.w)+'</span>':'')}).join('<br>')+'</div></div>'}
+  if(!anyLab)o+='<p class="hint">'+(en?"No registrations yet.":"Chưa có đăng ký.")+'</p>';
+  o+='</div></div><p class="hint" style="margin-top:12px">'+(en?"Updated ":"Cập nhật lúc ")+("0"+ROTA.at.getHours()).slice(-2)+":"+("0"+ROTA.at.getMinutes()).slice(-2)+(en?" · refreshes every 5 minutes":" · tự làm mới sau mỗi 5 phút")+'</p>';
+  return o}
+
 function render(){
   var s=cur(), st=s.settings, en=LANG==="en", nav=t("nav");
   document.documentElement.lang=LANG;
@@ -262,8 +342,8 @@ function render(){
   else h+='<div class="empty">'+(editing?'Bấm “Thêm ảnh” để tải lên hình ảnh hoạt động của phòng thí nghiệm.':t("noGallery"))+'</div>';
   h+='</div></div></div></section>';
   // schedule
-  if(st.scheduleUrl){var SI=en?[["Lab schedule","Register lab days every Saturday for the following week."],["Fish care","Morning and afternoon feeding, artemia hatching."],["Cleaning duty","One person per week."],["Seminar","Presenter, topic and reading."]]:[["Lịch lên Trung tâm","Đăng ký vào thứ Bảy cho cả tuần kế tiếp."],["Trực cá","Cho cá ăn sáng, chiều và ấp artemia."],["Trực nhật","Mỗi tuần một người phụ trách vệ sinh."],["Seminar","Người trình bày, chủ đề và tài liệu."]];
-    h+='<section class="block" id="lich-truc"><div class="wrap"><div class="head"><div><h2>'+(en?"Lab rota":"Lịch làm việc và lịch trực")+'</h2><p class="sub">'+(en?"Members record lab days and duties in a shared Google Sheet.":"Sinh viên và cán bộ ghi lịch lên Trung tâm và lịch trực trên bảng tính dùng chung.")+'</p></div><a class="btn primary" style="text-decoration:none" href="'+esc(st.scheduleUrl)+'" target="_blank" rel="noopener">'+(en?"Open the rota":"Mở lịch trực")+'</a></div><div class="research">'+SI.map(function(x){return '<article><h3>'+esc(x[0])+'</h3><p>'+esc(x[1])+'</p></article>'}).join("")+'</div></div></section>'}
+  if(st.scheduleUrl){
+    h+='<section class="block" id="lich-truc"><div class="wrap"><div class="head"><div><h2>'+(en?"Lab rota":"Lịch làm việc và lịch trực")+'</h2><p class="sub">'+(en?"Read directly from the lab's shared Google Sheet. To register or change a shift, open the sheet.":"Lấy trực tiếp từ bảng tính dùng chung của phòng thí nghiệm. Đăng ký hoặc thay đổi lịch: mở bảng tính.")+'</p></div><a class="btn primary" style="text-decoration:none" href="'+esc(st.scheduleUrl)+'" target="_blank" rel="noopener">'+(en?"Open the sheet to register":"Mở bảng tính để đăng ký")+'</a></div><div id="rota-live">'+rotaHTML()+'</div></div></section>'}
   // contact
   h+='<section class="block" id="lien-he"><div class="wrap contact"><div><h2 style="margin-bottom:22px">'+t("contact")+'</h2><dl><dt>'+t("pi")+'</dt><dd>'+esc(L(st,"pi"))+'</dd><dt>'+t("email")+'</dt><dd><a href="mailto:'+esc(st.email)+'">'+esc(st.email)+'</a></dd>'+(st.orcid?'<dt>ORCID</dt><dd><a href="'+esc(st.orcid)+'" target="_blank" rel="noopener">'+esc(st.orcid.replace(/^https?:\/\//,""))+'</a></dd>':'')+(st.officePhone?'<dt>'+t("office")+'</dt><dd>'+tel(st.officePhone)+'</dd>':'')+(st.phone?'<dt>'+t("mobile")+'</dt><dd>'+tel(st.phone)+'</dd>':'')+'<dt>'+t("address")+'</dt><dd>'+esc(L(st,"address"))+'</dd></dl></div><div class="join"><h3>'+esc(L(st,"joinTitle"))+'</h3><p>'+esc(L(st,"joinText"))+'</p></div></div></section></main>';
   h+='<footer><div class="wrap">© '+new Date().getFullYear()+' '+esc(st.labName)+' — '+esc(unitText)+'</div></footer>';
@@ -339,6 +419,8 @@ root.addEventListener("click",function(e){
 window.addEventListener("beforeunload",function(e){if(dirty){e.preventDefault();e.returnValue=""}});
 
 render();
+loadRota();
+setInterval(function(){if(!document.hidden){ROTA.status="idle";loadRota()}},300000);
 
 if(window.claude&&typeof window.claude.use==="function"){
   Promise.all([window.claude.use("user"),window.claude.use("artifact")]).then(function(r){
