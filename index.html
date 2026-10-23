@@ -241,7 +241,7 @@ function fishSVG(small){
 
 function tel(n){return '<a href="tel:'+esc(String(n).replace(/\s/g,''))+'">'+esc(n)+'</a>'}
 
-var ROTA={status:"idle",data:{},at:null};
+var ROTA={status:"idle",data:{},at:null,fail:[]};
 var ROTA_SHEETS=["Lịch lên Trung tâm","Trực cá","Trực nhật","Seminar","Cho cá đẻ"];
 var DOW_EN=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
 var DOW_VI=["Chủ nhật","Thứ Hai","Thứ Ba","Thứ Tư","Thứ Năm","Thứ Sáu","Thứ Bảy"];
@@ -258,21 +258,33 @@ function cells(r){return (r&&r.c)||[]}
 function jsonp(id,sheet){return new Promise(function(res,rej){
   var cb="zlabRota"+Math.random().toString(36).slice(2),s=document.createElement("script"),fin=false;
   function done(){fin=true;clearTimeout(t);try{delete window[cb]}catch(e){window[cb]=undefined}if(s.parentNode)s.parentNode.removeChild(s)}
-  var t=setTimeout(function(){if(!fin){done();rej(new Error("timeout"))}},12000);
+  var t=setTimeout(function(){if(!fin){done();rej(new Error("timeout"))}},20000);
   window[cb]=function(r){if(fin)return;done();if(r&&r.status!=="error"&&r.table)res(r.table);else rej(new Error("gviz"))};
   s.onerror=function(){if(!fin){done();rej(new Error("load"))}};
   s.src="https://docs.google.com/spreadsheets/d/"+id+"/gviz/tq?tqx=out:json;responseHandler:"+cb+"&headers=1&sheet="+encodeURIComponent(sheet);
   document.head.appendChild(s)})}
 function loadRota(){
   var id=sheetIdOf(cur().settings.scheduleUrl);if(!id||ROTA.status==="loading")return;
-  ROTA.status="loading";
-  Promise.all(ROTA_SHEETS.map(function(n){return jsonp(id,n)})).then(function(ts){
-    ROTA_SHEETS.forEach(function(n,i){ROTA.data[n]=ts[i].rows||[]});ROTA.status="ok";ROTA.at=new Date();paintRota()
-  }).catch(function(){ROTA.status=ROTA.at?"ok":"error";paintRota()})}
+  ROTA.status="loading";ROTA.fail=[];
+  var left=ROTA_SHEETS.length,total=left;
+  function settle(){if(--left>0)return;
+    if(ROTA.fail.length<total)ROTA.at=new Date();
+    ROTA.status=(ROTA.fail.length===total&&!ROTA.at)?"error":"ok";
+    paintRota()}
+  ROTA_SHEETS.forEach(function(n,i){setTimeout(function(){
+    jsonp(id,n).then(function(t){ROTA.data[n]=t.rows||[];settle()},
+      function(e){ROTA.fail.push(n+" \u2013 "+((e&&e.message)||"?"));settle()})},i*250)})}
+function retryRota(){if(ROTA.status==="loading")return;
+  ROTA.status="idle";ROTA.fail=[];
+  var el=document.getElementById("rota-live");
+  if(el)el.innerHTML='<p class="hint">'+(LANG==="en"?"Loading the rota\u2026":"\u0110ang t\u1ea3i l\u1ecbch\u2026")+'</p>';
+  loadRota()}
 function paintRota(){var el=document.getElementById("rota-live");if(el)el.innerHTML=rotaHTML()}
 function rotaHTML(){
   var en=LANG==="en";
-  if(ROTA.status==="error")return '<p class="empty">'+(en?"The rota could not be loaded here. Use the button above to open the sheet.":"Chưa tải được lịch trên trang này. Vui lòng bấm nút phía trên để mở bảng tính.")+'</p>';
+  if(ROTA.status==="error")return '<p class="empty">'+(en?"The rota could not be loaded here. Use the button above to open the sheet.":"Chưa tải được lịch trên trang này. Vui lòng bấm nút phía trên để mở bảng tính.")+'</p>'+
+    (ROTA.fail.length?'<p class="hint" style="margin-top:8px">'+esc(ROTA.fail.join(" · "))+'</p>':'')+
+    '<p style="margin-top:10px"><button class="btn" type="button" onclick="retryRota()">'+(en?"Try again":"Thử lại")+'</button></p>';
   if(!ROTA.at)return '<p class="hint">'+(en?"Loading the rota…":"Đang tải lịch…")+'</p>';
   var today=day0(new Date()),mon=addD(today,-((today.getDay()+6)%7)),sun=addD(mon,6),end7=addD(today,6),D=ROTA.data,o='<div class="rota">';
   var none=en?"Not assigned":"Chưa có người";
@@ -321,6 +333,7 @@ function rotaHTML(){
     o+='<div class="ritem"><time>'+esc(dowOf(d))+' '+dmy(d)+'</time><div>'+L.map(function(x){return '<span class="pill">'+esc(x.p)+(x.ca?' · '+esc(en?(CA_EN[x.ca]||x.ca):x.ca):'')+'</span>'+(x.w?'<span class="hint"> '+esc(x.w)+'</span>':'')}).join('<br>')+'</div></div>'}
   if(!anyLab)o+='<p class="hint">'+(en?"No registrations yet.":"Chưa có đăng ký.")+'</p>';
   o+='</div></div><p class="hint" style="margin-top:12px">'+(en?"Updated ":"Cập nhật lúc ")+("0"+ROTA.at.getHours()).slice(-2)+":"+("0"+ROTA.at.getMinutes()).slice(-2)+(en?" · refreshes every 5 minutes":" · tự làm mới sau mỗi 5 phút")+'</p>';
+  if(ROTA.fail.length)o+='<p class="hint" style="color:var(--danger)">'+(en?"Could not load: ":"Không tải được: ")+esc(ROTA.fail.join(" · "))+' <button class="btn" type="button" onclick="retryRota()">'+(en?"Try again":"Thử lại")+'</button></p>';
   return o}
 
 function render(){
