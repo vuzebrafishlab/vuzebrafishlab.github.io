@@ -132,7 +132,8 @@ h3{font-size:19px;margin:0 0 6px;line-height:1.3;font-weight:650}
 .rcard.wide{grid-column:1/-1}
 .rcard h3{margin-bottom:12px}
 .tscroll{overflow-x:auto}
-.rt{width:100%;border-collapse:collapse;font-size:15px;min-width:560px}
+.rt{width:100%;border-collapse:collapse;font-size:15px;min-width:720px}
+.rt th .sub2{display:block;font-weight:400;font-size:12.5px;opacity:.85}
 .rt th{text-align:left;font-size:13.5px;color:var(--muted);font-weight:600;padding:6px 10px;border-bottom:2px solid var(--line)}
 .rt td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
 .rt tr.today td{background:var(--gold-soft);font-weight:600}
@@ -294,10 +295,10 @@ function rotaHTML(){
   var today=day0(new Date()),mon=addD(today,-((today.getDay()+6)%7)),sun=addD(mon,6),end7=addD(today,6),D=ROTA.data,o='<div class="rota">';
   var none=en?"Not assigned":"Chưa có người";
   // fish care
-  var fish=(D["Trực cá"]||[]).map(function(r){var c=cells(r);return {d:gdate(c[0]),s:gt(c[2]),a:gt(c[3]),r:gt(c[4]),n:gt(c[5])}}).filter(function(x){return x.d&&x.d>=mon&&x.d<=sun});
-  o+='<div class="rcard wide"><h3>'+(en?"Fish care this week":"Trực cá tuần này")+' <span class="hint">'+dmy(mon)+' – '+dmy(sun)+'</span></h3><div class="tscroll"><table class="rt"><thead><tr><th>'+(en?"Day":"Ngày")+'</th><th>'+(en?"Morning feed":"Cho ăn sáng")+'</th><th>'+(en?"Afternoon feed":"Cho ăn chiều")+'</th><th>'+(en?"Artemia":"Ấp artemia")+'</th><th>'+(en?"Notes":"Ghi chú")+'</th></tr></thead><tbody>';
-  if(!fish.length)o+='<tr><td colspan="5" class="hint">'+(en?"No rows for this week in the sheet.":"Bảng tính chưa có dòng cho tuần này.")+'</td></tr>';
-  fish.forEach(function(x){o+='<tr'+(sameD(x.d,today)?' class="today"':'')+'><td>'+esc(dowOf(x.d))+' '+dmy(x.d)+'</td>'+[x.s,x.a,x.r].map(function(v){return '<td'+(v?'':' class="miss"')+'>'+esc(v||none)+'</td>'}).join("")+'<td>'+esc(x.n)+'</td></tr>'});
+  var fish=(D["Trực cá"]||[]).map(function(r){var c=cells(r);return {d:gdate(c[0]),s:gt(c[2]),a:gt(c[3]),r:gt(c[4]),g:gt(c[5]),n:gt(c[6])}}).filter(function(x){return x.d&&x.d>=mon&&x.d<=sun});
+  o+='<div class="rcard wide"><h3>'+(en?"Fish care this week":"Trực cá tuần này")+' <span class="hint">'+dmy(mon)+' – '+dmy(sun)+'</span></h3><div class="tscroll"><table class="rt"><thead><tr><th>'+(en?"Day":"Ngày")+'</th><th>'+(en?"Morning feed":"Cho ăn sáng")+'<span class="sub2">'+(en?"dry food":"thức ăn bột")+'</span></th><th>'+(en?"Afternoon feed":"Cho ăn chiều")+'<span class="sub2">'+(en?"artemia":"Artemia")+'</span></th><th>'+(en?"Hatch artemia":"Ấp artemia")+'</th><th>'+(en?"Harvest artemia":"Thu artemia")+'</th><th>'+(en?"Notes":"Ghi chú")+'</th></tr></thead><tbody>';
+  if(!fish.length)o+='<tr><td colspan="6" class="hint">'+(en?"No rows for this week in the sheet.":"Bảng tính chưa có dòng cho tuần này.")+'</td></tr>';
+  fish.forEach(function(x){o+='<tr'+(sameD(x.d,today)?' class="today"':'')+'><td>'+esc(dowOf(x.d))+' '+dmy(x.d)+'</td>'+[x.s,x.a,x.r,x.g].map(function(v){return '<td'+(v?'':' class="miss"')+'>'+esc(v||none)+'</td>'}).join("")+'<td>'+esc(x.n)+'</td></tr>'});
   o+='</tbody></table></div></div>';
   // cleaning
   var cl=(D["Trực nhật"]||[]).map(function(r){var c=cells(r);return {a:gdate(c[0]),b:gdate(c[1]),p:gt(c[2]),k:gv(c[3])===true}}).filter(function(x){return x.a&&x.b&&today>=x.a&&today<=x.b})[0];
@@ -327,7 +328,7 @@ function rotaHTML(){
     up.forEach(function(x){o+='<div class="ritem"><time>'+esc(dowOf(x.d))+' '+dmy(x.d)+'</time><div><b>'+esc(x.p||"—")+'</b> <span class="pill">'+esc(tname(x.m)||"—")+' + '+esc(tname(x.f)||"—")+'</span>'+(x.w?'<span class="hint"> '+esc(x.w)+'</span>':'')+'</div></div>'});
     o+='</div>'}
   else o+='<p class="hint" style="margin-top:12px">'+(en?"No breeding booked yet.":"Chưa có đăng ký cho đẻ.")+'</p>';
-  o+='</div>';
+  o+='<p class="hint" style="margin-top:12px">'+(en?"Up to 2 male and 2 female tanks per member per session. Need more? Please arrange it with Dr. Nguyễn Thành Vũ so other groups can still use the tanks.":"Mỗi thành viên đăng ký tối đa 2 bể đực và 2 bể cái cho mỗi lần cho đẻ. Cần nhiều hơn, vui lòng trao đổi với TS. Nguyễn Thành Vũ để các nhóm khác cùng sử dụng được.")+'</p></div>';
   // lab days
   var lab=(D["Lịch lên Trung tâm"]||[]).map(function(r){var c=cells(r);return {d:gdate(c[0]),p:gt(c[2]),ca:gt(c[3]),w:gt(c[4]),n:gt(c[5])}}).filter(function(x){return x.d&&x.p&&x.d>=today&&x.d<=end7&&!/ví dụ/i.test(x.n)}).sort(function(a,b){return a.d-b.d||a.p.localeCompare(b.p)});
   var byDay={};lab.forEach(function(x){var k=x.d.getTime();(byDay[k]=byDay[k]||[]).push(x)});
