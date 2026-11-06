@@ -126,6 +126,16 @@ section{padding:62px 0}
 .host .box small{color:#6b5a00;font-weight:700;letter-spacing:1px;text-transform:uppercase}
 .host .box h3{font-size:2.2rem;font-weight:800;color:var(--navy);margin-top:4px}
 
+/* REGISTRATION */
+.reg{max-width:720px;margin:0 auto;text-align:center;background:#fff;border:1px solid #d9e6fb;
+  border-radius:20px;padding:36px 28px;box-shadow:0 14px 34px rgba(10,40,100,.1)}
+.reg p{color:var(--muted);font-size:1rem;margin-bottom:0}
+.reg-btn{display:inline-block;margin:22px 0 10px;background:linear-gradient(135deg,#0261d4,#2b8bff);
+  color:#fff;font-weight:700;font-size:1.08rem;padding:15px 34px;border-radius:40px;
+  box-shadow:0 10px 26px rgba(2,97,212,.35);transition:.25s}
+.reg-btn:hover{transform:translateY(-3px);box-shadow:0 16px 36px rgba(2,97,212,.45)}
+.reg-note{font-size:.84rem;color:#8795ad}
+
 /* FOOTER */
 footer{background:var(--navy-d);color:#cfe0ff;padding:40px 0 28px;text-align:center}
 footer .msg{font-size:1.1rem;font-style:italic;color:#fff;margin-bottom:16px}
@@ -159,6 +169,7 @@ footer .meta a{color:var(--yellow)}
       <li><a href="#doi-bong">Đội bóng</a></li>
       <li><a href="#hinh-anh">Hình ảnh</a></li>
       <li><a href="#the-thuc">Thể thức</a></li>
+      <li><a href="#dang-ky">Đăng ký</a></li>
       <li><a href="#dang-cai">Đăng cai</a></li>
     </ul>
   </div>
@@ -239,10 +250,28 @@ footer .meta a{color:var(--yellow)}
       <div class="line"></div>
     </div>
     <div class="steps">
-      <div class="step"><div class="n">1</div><h4>Vòng bảng</h4><p>Các đội thi đấu vòng tròn tính điểm để chọn đội vào vòng trong.</p></div>
-      <div class="step"><div class="n">2</div><h4>Bán kết</h4><p>Hai cặp đấu loại trực tiếp xác định các đội vào chung kết.</p></div>
-      <div class="step"><div class="n">3</div><h4>Chung kết</h4><p>Trận tranh ngôi vô địch và trận tranh hạng Ba.</p></div>
-      <div class="step"><div class="n">4</div><h4>Trao giải</h4><p>Vinh danh các đội và các giải cá nhân xuất sắc.</p></div>
+      <div class="step"><div class="n">1</div><h4>Vòng bảng</h4><p>5 đội đấu vòng tròn 1 lượt (10 trận). Thắng 3đ – Hòa 1đ – Thua 0đ. 4 đội đứng đầu vào bán kết.</p></div>
+      <div class="step"><div class="n">2</div><h4>Bán kết</h4><p>Loại trực tiếp: BK1 Nhất bảng – Tư bảng; BK2 Nhì bảng – Ba bảng.</p></div>
+      <div class="step"><div class="n">3</div><h4>Hạng Ba</h4><p>Hai đội thua bán kết gặp nhau để xác định đội hạng Ba.</p></div>
+      <div class="step"><div class="n">4</div><h4>Chung kết</h4><p>Hai đội thắng bán kết tranh ngôi vô địch, sau đó trao giải.</p></div>
+    </div>
+    <p style="text-align:center;color:#dce9ff;margin-top:26px;font-size:.94rem">
+      Xếp hạng vòng bảng: Điểm → Hiệu số bàn thắng → Tổng bàn thắng → Kết quả đối đầu.
+    </p>
+  </div>
+</section>
+
+<section id="dang-ky" style="background:#eef4ff">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Đăng ký tham dự</div>
+      <h2>Đăng Ký Đội Hình</h2>
+      <div class="line"></div>
+    </div>
+    <div class="reg">
+      <p>Mỗi đội chủ động điền danh sách thành viên vào bảng đăng ký trực tuyến. File có sẵn <b>một cột riêng cho mỗi đội</b> để thêm thành viên, kèm trang <b>Thể thức &amp; Lịch thi đấu</b>.</p>
+      <a class="reg-btn" href="https://docs.google.com/spreadsheets/d/14vbL5RpEsfIPyev9BNIC4sFbuwnjJeadh7Oh4MqEYrg/edit" target="_blank" rel="noopener">📝 Mở bảng đăng ký đội hình</a>
+      <p class="reg-note">Ai có đường dẫn đều có thể điền trực tiếp (Google Sheet). Vui lòng chỉ nhập vào cột của đội mình.</p>
     </div>
   </div>
 </section>
