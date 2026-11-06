@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Giải Bóng Đá Chào Mừng Ngày Nhà Giáo Việt Nam 20/11</title>
+<meta name="description" content="Giải bóng đá giao hữu chào mừng Ngày Nhà giáo Việt Nam 20/11 — Kết nối đam mê, gắn kết đồng nghiệp. Ngày 28/11/2026, đơn vị đăng cai HCMBiotech.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0a3a86; --navy-d:#062a63; --blue:#0261d4; --blue-l:#2b8bff;
+  --yellow:#ffe814; --orange:#ff7a1a; --red:#e3142b;
+  --ink:#10244a; --muted:#5a6b88; --bg:#f3f7ff; --white:#fff;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Be Vietnam Pro',system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
+img{max-width:100%;display:block}
+.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+a{color:inherit;text-decoration:none}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:50;background:rgba(10,58,134,.96);backdrop-filter:blur(8px);box-shadow:0 2px 18px rgba(6,42,99,.25)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:62px}
+.brand{display:flex;align-items:center;gap:10px;color:#fff;font-weight:800;font-size:1.05rem}
+.brand .ball{width:30px;height:30px;border-radius:50%;background:
+  radial-gradient(circle at 35% 30%,#fff 0 46%,transparent 47%),var(--navy);
+  border:2px solid #fff;box-shadow:0 0 0 2px var(--blue)}
+.nav ul{display:flex;gap:26px;list-style:none}
+.nav ul a{color:#dce9ff;font-weight:600;font-size:.95rem;transition:.2s}
+.nav ul a:hover{color:var(--yellow)}
+.nav-toggle{display:none;background:none;border:0;color:#fff;font-size:1.6rem;cursor:pointer}
+
+/* HERO */
+.hero{position:relative;background:linear-gradient(135deg,#0a3a86,#0261d4 55%,#2b8bff);color:#fff;overflow:hidden;padding:54px 0 70px}
+.hero::before{content:"";position:absolute;inset:0;background:
+  radial-gradient(900px 400px at 80% -10%,rgba(255,255,255,.18),transparent),
+  radial-gradient(700px 400px at 0% 120%,rgba(255,232,20,.12),transparent)}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center}
+.badge2011{display:inline-flex;align-items:center;gap:10px;background:#fff;color:var(--red);
+  font-weight:800;font-size:1.35rem;padding:6px 18px;border-radius:40px;box-shadow:0 8px 24px rgba(0,0,0,.2)}
+.badge2011 small{color:var(--navy);font-size:.72rem;font-weight:700;letter-spacing:.5px}
+.hero h1{font-size:clamp(2rem,4.4vw,3.3rem);line-height:1.08;font-weight:800;margin:18px 0 6px;text-shadow:0 3px 14px rgba(0,0,0,.25)}
+.hero h1 span{color:var(--yellow)}
+.hero .sub{font-size:1.12rem;color:#eaf2ff;max-width:34ch;margin-bottom:14px}
+.tagline{display:inline-block;background:rgba(255,232,20,.16);border:1px solid rgba(255,232,20,.5);
+  color:#fff;font-weight:600;font-size:.96rem;padding:8px 16px;border-radius:30px}
+.hero-art{position:relative}
+.hero-art img{border-radius:16px;box-shadow:0 24px 60px rgba(3,20,55,.5);border:4px solid rgba(255,255,255,.5)}
+
+/* COUNTDOWN */
+.countdown{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
+.cd{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);border-radius:14px;
+  padding:12px 6px;min-width:84px;text-align:center;backdrop-filter:blur(4px)}
+.cd b{display:block;font-size:2rem;font-weight:800;color:var(--yellow);line-height:1}
+.cd span{font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:#dce9ff}
+
+/* INFO STRIP */
+.info{margin-top:-36px;position:relative;z-index:5}
+.info .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:#fff;border-radius:16px;padding:22px;box-shadow:0 12px 30px rgba(10,40,100,.1);
+  border:1px solid #e6eefc;text-align:center;transition:.25s}
+.card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(10,40,100,.16)}
+.card .ic{width:52px;height:52px;margin:0 auto 10px;border-radius:14px;display:grid;place-items:center;
+  font-size:1.5rem;background:linear-gradient(135deg,#0261d4,#2b8bff);color:#fff}
+.card h3{font-size:1.02rem;color:var(--muted);font-weight:600;margin-bottom:4px}
+.card p{font-size:1.3rem;font-weight:800;color:var(--navy)}
+
+/* SECTIONS */
+section{padding:62px 0}
+.sec-head{text-align:center;margin-bottom:40px}
+.sec-head .kicker{color:var(--blue);font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:.82rem}
+.sec-head h2{font-size:clamp(1.6rem,3.2vw,2.3rem);font-weight:800;color:var(--navy);margin-top:6px}
+.sec-head .line{width:72px;height:4px;border-radius:4px;background:linear-gradient(90deg,var(--yellow),var(--orange));margin:14px auto 0}
+
+/* TEAMS */
+.teams{display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
+.team{background:#fff;border-radius:16px;padding:22px 14px;text-align:center;border:1px solid #e6eefc;
+  box-shadow:0 10px 26px rgba(10,40,100,.08);transition:.25s;position:relative;overflow:hidden}
+.team::after{content:"";position:absolute;left:0;top:0;height:5px;width:100%;
+  background:linear-gradient(90deg,var(--blue),var(--yellow))}
+.team:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(10,40,100,.16)}
+.team .logo{height:92px;display:grid;place-items:center;margin-bottom:12px}
+.team .logo img{max-height:88px;width:auto;object-fit:contain}
+.team .name{font-weight:700;color:var(--ink);font-size:.92rem;min-height:38px;display:flex;align-items:center;justify-content:center}
+.team .code{margin-top:6px;font-size:.8rem;font-weight:600;color:var(--blue);background:#eaf2ff;
+  display:inline-block;padding:3px 12px;border-radius:20px}
+
+/* GALLERY */
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:170px;gap:14px}
+.gitem{overflow:hidden;border-radius:14px;box-shadow:0 10px 24px rgba(10,40,100,.12);cursor:pointer;position:relative;background:#eef3fb}
+.gitem.big{grid-column:span 2;grid-row:span 2}
+.gitem img{width:100%;height:100%;object-fit:cover;transition:.4s}
+.gitem:hover img{transform:scale(1.07)}
+.gitem::after{content:"🔍";position:absolute;inset:0;display:grid;place-items:center;font-size:1.6rem;
+  background:rgba(6,42,99,.0);color:transparent;transition:.25s}
+.gitem:hover::after{background:rgba(6,42,99,.35);color:#fff}
+/* LIGHTBOX */
+.lb{position:fixed;inset:0;z-index:100;background:rgba(5,16,40,.92);display:none;
+  align-items:center;justify-content:center;flex-direction:column;padding:24px}
+.lb.on{display:flex}
+.lb img{max-width:92vw;max-height:80vh;border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+.lb .cap{color:#fff;margin-top:14px;font-size:1rem;text-align:center;max-width:70ch}
+.lb .x{position:absolute;top:18px;right:24px;font-size:2.2rem;color:#fff;cursor:pointer;line-height:1}
+.lb .arrow{position:absolute;top:50%;transform:translateY(-50%);font-size:2.6rem;color:#fff;
+  cursor:pointer;user-select:none;padding:10px 16px;opacity:.8}
+.lb .arrow:hover{opacity:1}
+.lb .prev{left:12px}.lb .next{right:12px}
+
+/* FORMAT */
+.format{background:linear-gradient(135deg,#0a3a86,#0261d4);color:#fff}
+.format .sec-head h2,.format .sec-head .kicker{color:#fff}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.step{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:24px;text-align:center}
+.step .n{width:46px;height:46px;border-radius:50%;background:var(--yellow);color:var(--navy);
+  font-weight:800;font-size:1.3rem;display:grid;place-items:center;margin:0 auto 12px}
+.step h4{font-size:1.05rem;margin-bottom:6px}
+.step p{font-size:.9rem;color:#dce9ff}
+
+/* HOST */
+.host .box{background:linear-gradient(135deg,#fff7d6,#ffe814);border-radius:20px;padding:40px;text-align:center;
+  box-shadow:0 16px 40px rgba(200,160,0,.25)}
+.host .box .cup{font-size:3rem}
+.host .box small{color:#6b5a00;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+.host .box h3{font-size:2.2rem;font-weight:800;color:var(--navy);margin-top:4px}
+
+/* FOOTER */
+footer{background:var(--navy-d);color:#cfe0ff;padding:40px 0 28px;text-align:center}
+footer .msg{font-size:1.1rem;font-style:italic;color:#fff;margin-bottom:16px}
+footer .meta{font-size:.88rem;color:#9fb8e6}
+footer .meta a{color:var(--yellow)}
+
+@media(max-width:900px){
+  .hero .wrap{grid-template-columns:1fr;gap:26px}
+  .info .grid{grid-template-columns:1fr}
+  .teams{grid-template-columns:repeat(2,1fr)}
+  .steps{grid-template-columns:repeat(2,1fr)}
+  .gallery{grid-template-columns:repeat(2,1fr);grid-auto-rows:140px}
+  .gitem.big{grid-column:span 2;grid-row:span 1}
+  .nav ul{display:none;position:absolute;top:62px;left:0;right:0;flex-direction:column;gap:0;
+    background:var(--navy);padding:10px 0}
+  .nav ul.open{display:flex}
+  .nav ul li{padding:10px 20px;border-top:1px solid rgba(255,255,255,.08)}
+  .nav-toggle{display:block}
+}
+@media(max-width:560px){.teams{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <div class="brand"><span class="ball"></span> Giải Bóng Đá 20/11</div>
+    <button class="nav-toggle" aria-label="menu">☰</button>
+    <ul id="menu">
+      <li><a href="#gioi-thieu">Giới thiệu</a></li>
+      <li><a href="#doi-bong">Đội bóng</a></li>
+      <li><a href="#hinh-anh">Hình ảnh</a></li>
+      <li><a href="#the-thuc">Thể thức</a></li>
+      <li><a href="#dang-cai">Đăng cai</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="gioi-thieu">
+  <div class="wrap">
+    <div>
+      <span class="badge2011">20/11 <small>NGÀY NHÀ GIÁO VIỆT NAM</small></span>
+      <h1>GIẢI BÓNG ĐÁ<br><span>Chào mừng Ngày Nhà giáo Việt Nam</span></h1>
+      <p class="sub">Sân chơi giao hữu kết nối các đơn vị, tôn vinh tinh thần thể thao và tri ân nghề giáo.</p>
+      <div class="tagline">Kết nối đam mê – Gắn kết đồng nghiệp – Lan tỏa tinh thần tri ân</div>
+      <div class="countdown" id="countdown" aria-label="Đếm ngược">
+        <div class="cd"><b id="d">00</b><span>Ngày</span></div>
+        <div class="cd"><b id="h">00</b><span>Giờ</span></div>
+        <div class="cd"><b id="m">00</b><span>Phút</span></div>
+        <div class="cd"><b id="s">00</b><span>Giây</span></div>
+      </div>
+    </div>
+    <div class="hero-art">
+      <img src="assets/poster.jpg" alt="Poster giải bóng đá chào mừng 20/11">
+    </div>
+  </div>
+</header>
+
+<div class="info wrap">
+  <div class="grid">
+    <div class="card"><div class="ic">📅</div><h3>Ngày thi đấu</h3><p>28/11/2026</p></div>
+    <div class="card"><div class="ic">⏰</div><h3>Thời gian</h3><p>7:00 – 24:00</p></div>
+    <div class="card"><div class="ic">🏟️</div><h3>Đơn vị đăng cai</h3><p>HCMBiotech</p></div>
+  </div>
+</div>
+
+<section id="doi-bong">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Các đội tham dự</div>
+      <h2>5 Đội Bóng Góp Mặt</h2>
+      <div class="line"></div>
+    </div>
+    <div class="teams">
+      <div class="team"><div class="logo"><img src="assets/vhu.png" alt="Văn Hiến"></div>
+        <div class="name">Khoa Kỹ thuật Ứng dụng – ĐH Văn Hiến</div><span class="code">KTUD – VHU</span></div>
+      <div class="team"><div class="logo"><img src="assets/ueh.png" alt="UEH"></div>
+        <div class="name">Đại học Kinh tế TP.HCM</div><span class="code">UEH</span></div>
+      <div class="team"><div class="logo"><img src="assets/hcmbiotech.png" alt="HCMBiotech"></div>
+        <div class="name">Trung tâm CNSH TP.HCM</div><span class="code">HCMBiotech</span></div>
+      <div class="team"><div class="logo"><img src="assets/shtplabs.png" alt="SHTPLabs"></div>
+        <div class="name">SHTP Labs</div><span class="code">SHTPLabs</span></div>
+      <div class="team"><div class="logo"><img src="assets/qtsc.png" alt="QTSC"></div>
+        <div class="name">Quality Tech Solution Complex</div><span class="code">QTSC</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="hinh-anh" style="background:#fff">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Khoảnh khắc</div>
+      <h2>Hình Ảnh Thi Đấu Các Năm</h2>
+      <div class="line"></div>
+    </div>
+    <div class="gallery">
+      <a class="gitem big" href="assets/match-1.jpg" data-cap="Các đội chụp hình lưu niệm trước trận đấu"><img loading="lazy" src="assets/match-1.jpg" alt="Hình thi đấu bóng đá"></a>
+      <a class="gitem" href="assets/match-2.jpg" data-cap="Đội bóng giao hữu các đơn vị"><img loading="lazy" src="assets/match-2.jpg" alt="Đội bóng giao hữu"></a>
+      <a class="gitem" href="assets/match-3.jpg" data-cap="Đội hình ra sân"><img loading="lazy" src="assets/match-3.jpg" alt="Đội hình ra sân"></a>
+      <a class="gitem" href="assets/match-4.jpg" data-cap="Khoảnh khắc trước trận đấu"><img loading="lazy" src="assets/match-4.jpg" alt="Khoảnh khắc trước trận"></a>
+      <a class="gitem" href="assets/match-5.jpg" data-cap="Tinh thần thể thao sôi nổi"><img loading="lazy" src="assets/match-5.jpg" alt="Tinh thần thể thao"></a>
+    </div>
+  </div>
+</section>
+
+<section class="format" id="the-thuc">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Thể thức thi đấu</div>
+      <h2>Tinh Thần Giao Hữu</h2>
+      <div class="line"></div>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><h4>Vòng bảng</h4><p>Các đội thi đấu vòng tròn tính điểm để chọn đội vào vòng trong.</p></div>
+      <div class="step"><div class="n">2</div><h4>Bán kết</h4><p>Hai cặp đấu loại trực tiếp xác định các đội vào chung kết.</p></div>
+      <div class="step"><div class="n">3</div><h4>Chung kết</h4><p>Trận tranh ngôi vô địch và trận tranh hạng Ba.</p></div>
+      <div class="step"><div class="n">4</div><h4>Trao giải</h4><p>Vinh danh các đội và các giải cá nhân xuất sắc.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="host" id="dang-cai">
+  <div class="wrap">
+    <div class="box">
+      <div class="cup">🏆</div>
+      <small>Đơn vị đăng cai</small>
+      <h3>HCMBiotech</h3>
+      <p style="color:#6b5a00;font-weight:600;margin-top:6px">Trung tâm Công nghệ Sinh học TP. Hồ Chí Minh</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="msg">"Cùng nhau hướng tới một mùa giải thật sôi động và ý nghĩa!"</p>
+    <p class="meta">Giải Bóng Đá Chào Mừng Ngày Nhà Giáo Việt Nam 20/11 · 28/11/2026<br>
+    Đơn vị đăng cai: HCMBiotech · Trung tâm Công nghệ Sinh học TP.HCM</p>
+  </div>
+</footer>
+
+<div class="lb" id="lb">
+  <span class="x" id="lbx">&times;</span>
+  <span class="arrow prev" id="lbprev">&#8249;</span>
+  <img id="lbimg" src="" alt="">
+  <span class="arrow next" id="lbnext">&#8250;</span>
+  <div class="cap" id="lbcap"></div>
+</div>
+
+<script>
+// Lightbox gallery
+(function(){
+  const items=[...document.querySelectorAll('.gitem')];
+  const lb=document.getElementById('lb'),img=document.getElementById('lbimg'),cap=document.getElementById('lbcap');
+  let idx=0;
+  function show(i){idx=(i+items.length)%items.length;const a=items[idx];
+    img.src=a.getAttribute('href');cap.textContent=a.dataset.cap||'';}
+  function open(i){show(i);lb.classList.add('on');document.body.style.overflow='hidden';}
+  function close(){lb.classList.remove('on');document.body.style.overflow='';}
+  items.forEach((a,i)=>a.addEventListener('click',e=>{e.preventDefault();open(i);}));
+  document.getElementById('lbx').onclick=close;
+  document.getElementById('lbnext').onclick=e=>{e.stopPropagation();show(idx+1);};
+  document.getElementById('lbprev').onclick=e=>{e.stopPropagation();show(idx-1);};
+  lb.addEventListener('click',e=>{if(e.target===lb)close();});
+  document.addEventListener('keydown',e=>{if(!lb.classList.contains('on'))return;
+    if(e.key==='Escape')close();if(e.key==='ArrowRight')show(idx+1);if(e.key==='ArrowLeft')show(idx-1);});
+})();
+// Mobile menu
+document.querySelector('.nav-toggle').addEventListener('click',()=>{
+  document.getElementById('menu').classList.toggle('open');
+});
+document.querySelectorAll('#menu a').forEach(a=>a.addEventListener('click',()=>{
+  document.getElementById('menu').classList.remove('open');
+}));
+// Countdown to 28/11/2026 07:00 (UTC+7)
+const target=new Date('2026-11-28T07:00:00+07:00').getTime();
+function tick(){
+  const now=Date.now(), gap=target-now;
+  const set=(id,v)=>document.getElementById(id).textContent=String(Math.max(0,v)).padStart(2,'0');
+  if(gap<=0){set('d',0);set('h',0);set('m',0);set('s',0);return;}
+  set('d',Math.floor(gap/864e5));
+  set('h',Math.floor(gap%864e5/36e5));
+  set('m',Math.floor(gap%36e5/6e4));
+  set('s',Math.floor(gap%6e4/1e3));
+}
+tick();setInterval(tick,1000);
+</script>
+</body>
+</html>
