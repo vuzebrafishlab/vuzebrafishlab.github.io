@@ -128,6 +128,19 @@ section{padding:62px 0}
 .host .box small{color:#6b5a00;font-weight:700;letter-spacing:1px;text-transform:uppercase}
 .host .box h3{font-size:2.2rem;font-weight:800;color:var(--navy);margin-top:4px}
 
+/* VENUE */
+.venue{margin-top:20px}
+.venue-box{display:flex;align-items:center;gap:16px;background:#fff;border:1px solid #d9e6fb;
+  border-radius:16px;padding:16px 22px;box-shadow:0 10px 26px rgba(10,40,100,.08);transition:.2s}
+.venue-box:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(10,40,100,.14)}
+.venue .vic{font-size:1.8rem}
+.venue .vtext{display:flex;flex-direction:column;flex:1}
+.venue .vtext b{color:var(--navy);font-size:1.1rem}
+.venue .vtext span{color:var(--muted);font-size:.9rem}
+.venue .vgo{background:linear-gradient(135deg,#0261d4,#2b8bff);color:#fff;font-weight:700;
+  padding:10px 20px;border-radius:30px;white-space:nowrap;font-size:.92rem}
+@media(max-width:560px){.venue-box{flex-wrap:wrap}.venue .vgo{width:100%;text-align:center}}
+
 /* BRACKET */
 .bracket{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:36px}
 .bracket-2{grid-template-columns:repeat(2,1fr);max-width:760px;margin-left:auto;margin-right:auto}
@@ -228,9 +241,17 @@ footer .meta a{color:var(--yellow)}
   <div class="grid grid4">
     <div class="card"><div class="ic">📅</div><h3>Ngày thi đấu</h3><p>28/11/2026</p></div>
     <div class="card"><div class="ic">⏰</div><h3>Thời gian</h3><p>Chiều · 14:00 – 16:30</p></div>
-    <div class="card"><div class="ic">📍</div><h3>Địa điểm</h3><p><a href="https://maps.app.goo.gl/c2wPshVpUugiSWyw9" target="_blank" rel="noopener" style="color:var(--blue)">Xem bản đồ ↗</a></p></div>
+    <div class="card"><div class="ic">📍</div><h3>Địa điểm</h3><p style="font-size:1.05rem"><a href="https://maps.app.goo.gl/c2wPshVpUugiSWyw9" target="_blank" rel="noopener" style="color:var(--blue)">Sân Bóng Điện Lực ↗</a></p></div>
     <div class="card"><div class="ic">🏟️</div><h3>Đơn vị đăng cai</h3><p>HCMBiotech</p></div>
   </div>
+</div>
+
+<div class="venue wrap">
+  <a class="venue-box" href="https://maps.app.goo.gl/c2wPshVpUugiSWyw9" target="_blank" rel="noopener">
+    <span class="vic">📍</span>
+    <span class="vtext"><b>Sân Bóng Điện Lực</b><span>Trung Mỹ Tây, TP.HCM · Nhấn để xem bản đồ &amp; chỉ đường</span></span>
+    <span class="vgo">Chỉ đường ↗</span>
+  </a>
 </div>
 
 <section id="doi-bong">
