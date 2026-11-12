@@ -60,6 +60,8 @@ a{color:inherit;text-decoration:none}
 /* INFO STRIP */
 .info{margin-top:-36px;position:relative;z-index:5}
 .info .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.info .grid4{grid-template-columns:repeat(4,1fr)}
+.card p a{text-decoration:none;font-weight:800}
 .card{background:#fff;border-radius:16px;padding:22px;box-shadow:0 12px 30px rgba(10,40,100,.1);
   border:1px solid #e6eefc;text-align:center;transition:.25s}
 .card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(10,40,100,.16)}
@@ -148,7 +150,7 @@ section{padding:62px 0}
 .timetable table{width:100%;border-collapse:collapse}
 .timetable th{background:#eef4ff;color:var(--navy);text-align:left;padding:9px 18px;font-size:.82rem}
 .timetable td{padding:11px 18px;border-top:1px solid #eef2fa;font-size:.95rem}
-.timetable td:first-child{font-weight:800;color:var(--blue);width:70px;white-space:nowrap}
+.timetable td:first-child{font-weight:800;color:var(--blue);width:128px;white-space:nowrap}
 .timetable tr:last-child td{background:#fffaed;font-weight:600}
 
 /* REGISTRATION */
@@ -223,9 +225,10 @@ footer .meta a{color:var(--yellow)}
 </header>
 
 <div class="info wrap">
-  <div class="grid">
+  <div class="grid grid4">
     <div class="card"><div class="ic">📅</div><h3>Ngày thi đấu</h3><p>28/11/2026</p></div>
-    <div class="card"><div class="ic">⏰</div><h3>Thời gian</h3><p>Buổi sáng · từ 7:00</p></div>
+    <div class="card"><div class="ic">⏰</div><h3>Thời gian</h3><p>Chiều · 14:00 – 16:30</p></div>
+    <div class="card"><div class="ic">📍</div><h3>Địa điểm</h3><p><a href="https://maps.app.goo.gl/c2wPshVpUugiSWyw9" target="_blank" rel="noopener" style="color:var(--blue)">Xem bản đồ ↗</a></p></div>
     <div class="card"><div class="ic">🏟️</div><h3>Đơn vị đăng cai</h3><p>HCMBiotech</p></div>
   </div>
 </div>
@@ -297,27 +300,25 @@ footer .meta a{color:var(--yellow)}
     <div class="bracket bracket-2">
       <div class="round">
         <div class="rtitle">Bán kết</div>
-        <div class="match"><span class="t">Đội A</span><span class="vs">vs</span><span class="t">Đội B</span><small>Bán kết 1</small></div>
-        <div class="match"><span class="t">Đội C</span><span class="vs">vs</span><span class="t">Đội D</span><small>Bán kết 2</small></div>
+        <div class="match"><span class="t">Đội A</span><span class="vs">vs</span><span class="t">Đội B</span><small>Bán kết 1 · 14:00 · Sân 1</small></div>
+        <div class="match"><span class="t">Đội C</span><span class="vs">vs</span><span class="t">Đội D</span><small>Bán kết 2 · 14:00 · Sân 2</small></div>
       </div>
       <div class="round">
         <div class="rtitle">Chung kết &amp; hạng Ba</div>
-        <div class="match gold"><span class="t">Thắng BK1</span><span class="vs">vs</span><span class="t">Thắng BK2</span><small>🏆 Chung kết</small></div>
-        <div class="match bronze"><span class="t">Thua BK1</span><span class="vs">vs</span><span class="t">Thua BK2</span><small>🥉 Tranh hạng Ba</small></div>
+        <div class="match gold"><span class="t">Thắng BK1</span><span class="vs">vs</span><span class="t">Thắng BK2</span><small>🏆 Chung kết · 15:40 · Sân 1</small></div>
+        <div class="match bronze"><span class="t">Thua BK1</span><span class="vs">vs</span><span class="t">Thua BK2</span><small>🥉 Tranh hạng Ba · 14:45 · Sân 1</small></div>
       </div>
     </div>
 
     <div class="timetable">
-      <div class="tt-head">Khung giờ dự kiến — Sáng 28/11/2026 <span>(1 sân · nếu có 2 sân, 2 bán kết đá song song để rút ngắn)</span></div>
+      <div class="tt-head">Khung giờ thi đấu — Chiều 28/11/2026 <span>(2 trận bán kết đá song song trên 2 sân)</span></div>
       <table>
         <tr><th>Giờ</th><th>Nội dung</th></tr>
-        <tr><td>7:00</td><td>Khai mạc &amp; bốc thăm chia cặp</td></tr>
-        <tr><td>7:30</td><td>Bán kết 1</td></tr>
-        <tr><td>8:20</td><td>Bán kết 2</td></tr>
-        <tr><td>9:10</td><td>Giải lao</td></tr>
-        <tr><td>9:25</td><td>Tranh hạng Ba</td></tr>
-        <tr><td>10:15</td><td>Chung kết</td></tr>
-        <tr><td>11:05</td><td>Trao giải &amp; bế mạc</td></tr>
+        <tr><td>13:30 – 14:00</td><td>Khai mạc &amp; bốc thăm chia cặp</td></tr>
+        <tr><td>14:00 – 14:40</td><td>Bán kết 1 (Sân 1) · Bán kết 2 (Sân 2)</td></tr>
+        <tr><td>14:45 – 15:30</td><td>Tranh hạng Ba (Sân 1)</td></tr>
+        <tr><td>15:40 – 16:30</td><td>Chung kết (Sân 1)</td></tr>
+        <tr><td>16:30</td><td>Trao giải &amp; bế mạc</td></tr>
       </table>
     </div>
   </div>
@@ -391,7 +392,7 @@ document.querySelectorAll('#menu a').forEach(a=>a.addEventListener('click',()=>{
   document.getElementById('menu').classList.remove('open');
 }));
 // Countdown to 28/11/2026 07:00 (UTC+7)
-const target=new Date('2026-11-28T07:00:00+07:00').getTime();
+const target=new Date('2026-11-28T14:00:00+07:00').getTime();
 function tick(){
   const now=Date.now(), gap=target-now;
   const set=(id,v)=>document.getElementById(id).textContent=String(Math.max(0,v)).padStart(2,'0');
