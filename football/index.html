@@ -128,6 +128,7 @@ section{padding:62px 0}
 
 /* BRACKET */
 .bracket{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:36px}
+.bracket-2{grid-template-columns:repeat(2,1fr);max-width:760px;margin-left:auto;margin-right:auto}
 .round{display:flex;flex-direction:column;gap:16px;justify-content:center}
 .rtitle{text-align:center;font-weight:800;color:var(--blue);text-transform:uppercase;
   letter-spacing:1px;font-size:.82rem;margin-bottom:4px}
@@ -233,7 +234,7 @@ footer .meta a{color:var(--yellow)}
   <div class="wrap">
     <div class="sec-head">
       <div class="kicker">Các đội tham dự</div>
-      <h2>5 Đội Bóng Góp Mặt</h2>
+      <h2>4 Đội Bóng Góp Mặt</h2>
       <div class="line"></div>
     </div>
     <div class="teams">
@@ -245,8 +246,6 @@ footer .meta a{color:var(--yellow)}
         <div class="name">Trung tâm CNSH TP.HCM</div><span class="code">HCMBiotech</span></div>
       <div class="team"><div class="logo"><img src="assets/shtplabs.png" alt="SHTPLabs"></div>
         <div class="name">SHTP Labs</div><span class="code">SHTPLabs</span></div>
-      <div class="team"><div class="logo"><img src="assets/qtsc.png" alt="QTSC"></div>
-        <div class="name">Quality Tech Solution Complex</div><span class="code">QTSC</span></div>
     </div>
   </div>
 </section>
@@ -276,10 +275,10 @@ footer .meta a{color:var(--yellow)}
       <div class="line"></div>
     </div>
     <div class="steps">
-      <div class="step"><div class="n">1</div><h4>Bốc thăm</h4><p>5 đội bốc thăm chia nhánh: 2 đội vào vòng loại, 3 đội được vào thẳng bán kết.</p></div>
-      <div class="step"><div class="n">2</div><h4>Vòng loại</h4><p>1 trận play-in giữa 2 đội bốc thăm; đội thắng vào bán kết (đủ 4 đội).</p></div>
-      <div class="step"><div class="n">3</div><h4>Bán kết</h4><p>2 trận loại trực tiếp. Đội thắng vào chung kết, đội thua tranh hạng Ba.</p></div>
-      <div class="step"><div class="n">4</div><h4>Chung kết</h4><p>Tranh hạng Ba và chung kết, sau đó trao giải — gọn trong buổi sáng.</p></div>
+      <div class="step"><div class="n">1</div><h4>Bốc thăm</h4><p>4 đội bốc thăm chia thành 2 cặp bán kết.</p></div>
+      <div class="step"><div class="n">2</div><h4>Bán kết</h4><p>2 trận loại trực tiếp (BK1 & BK2); đội thắng vào chung kết.</p></div>
+      <div class="step"><div class="n">3</div><h4>Tranh hạng Ba</h4><p>Hai đội thua bán kết gặp nhau để xác định hạng Ba.</p></div>
+      <div class="step"><div class="n">4</div><h4>Chung kết</h4><p>Hai đội thắng bán kết tranh ngôi vô địch, sau đó trao giải.</p></div>
     </div>
     <p style="text-align:center;color:#eaf2ff;margin-top:26px;font-size:.98rem">
       Đấu loại trực tiếp (knock-out) · Mỗi đội ra sân <b style="color:var(--yellow)">7 người</b> (sân 7) · Hòa sau 2 hiệp → đá luân lưu.
@@ -295,15 +294,11 @@ footer .meta a{color:var(--yellow)}
       <div class="line"></div>
     </div>
 
-    <div class="bracket">
-      <div class="round">
-        <div class="rtitle">Vòng loại</div>
-        <div class="match"><span class="t">Đội bốc thăm 1</span><span class="vs">vs</span><span class="t">Đội bốc thăm 2</span></div>
-      </div>
+    <div class="bracket bracket-2">
       <div class="round">
         <div class="rtitle">Bán kết</div>
-        <div class="match"><span class="t">Thắng vòng loại</span><span class="vs">vs</span><span class="t">Đội C</span></div>
-        <div class="match"><span class="t">Đội D</span><span class="vs">vs</span><span class="t">Đội E</span></div>
+        <div class="match"><span class="t">Đội A</span><span class="vs">vs</span><span class="t">Đội B</span><small>Bán kết 1</small></div>
+        <div class="match"><span class="t">Đội C</span><span class="vs">vs</span><span class="t">Đội D</span><small>Bán kết 2</small></div>
       </div>
       <div class="round">
         <div class="rtitle">Chung kết &amp; hạng Ba</div>
@@ -316,14 +311,13 @@ footer .meta a{color:var(--yellow)}
       <div class="tt-head">Khung giờ dự kiến — Sáng 28/11/2026 <span>(1 sân · nếu có 2 sân, 2 bán kết đá song song để rút ngắn)</span></div>
       <table>
         <tr><th>Giờ</th><th>Nội dung</th></tr>
-        <tr><td>7:00</td><td>Khai mạc &amp; bốc thăm chia nhánh</td></tr>
-        <tr><td>7:20</td><td>Vòng loại (play-in)</td></tr>
-        <tr><td>8:10</td><td>Bán kết 1</td></tr>
-        <tr><td>9:00</td><td>Bán kết 2</td></tr>
-        <tr><td>9:45</td><td>Giải lao</td></tr>
-        <tr><td>10:00</td><td>Tranh hạng Ba</td></tr>
-        <tr><td>10:55</td><td>Chung kết</td></tr>
-        <tr><td>11:40</td><td>Trao giải &amp; bế mạc</td></tr>
+        <tr><td>7:00</td><td>Khai mạc &amp; bốc thăm chia cặp</td></tr>
+        <tr><td>7:30</td><td>Bán kết 1</td></tr>
+        <tr><td>8:20</td><td>Bán kết 2</td></tr>
+        <tr><td>9:10</td><td>Giải lao</td></tr>
+        <tr><td>9:25</td><td>Tranh hạng Ba</td></tr>
+        <tr><td>10:15</td><td>Chung kết</td></tr>
+        <tr><td>11:05</td><td>Trao giải &amp; bế mạc</td></tr>
       </table>
     </div>
   </div>
