@@ -201,6 +201,25 @@ dl.help dd{margin:3px 0 0;font-size:.86rem;color:var(--ink-2)}
 
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(150%);background:var(--ink);color:#fff;padding:12px 20px;border-radius:3px;font-size:.88rem;font-weight:500;z-index:99;transition:transform .22s;max-width:92vw;box-shadow:0 16px 36px -18px rgba(0,0,0,.7)}
 .toast.show{transform:translateX(-50%) translateY(0)}
+/* ── dải mở đầu: nền xanh, chữ trắng ── */
+.utility{background:var(--deep-2)}
+.hero{background:linear-gradient(165deg,#0d4a5a 0%,#135f74 55%,#17708a 100%);color:#fff}
+.hero .sigil{background:rgba(255,255,255,.95);border-color:rgba(255,255,255,.45)}
+.hero .eyebrow{color:#9bdbe6}
+.hero h1{color:#fff}
+.hero .lede{color:#d6ebf0}
+.hero .facts{border-top-color:rgba(255,255,255,.26);border-bottom-color:rgba(255,255,255,.26)}
+.hero .fact{border-right-color:rgba(255,255,255,.18)}
+.hero .fact b{color:#fff}
+.hero .fact span{color:#a8d2dc}
+.hero .cmdlabel{color:#a8d2dc}
+.hero .cmdbox{border-color:rgba(255,255,255,.55);border-left-color:#7fd0de;box-shadow:0 16px 36px -18px rgba(0,0,0,.6)}
+.hero .cmdbox:focus-within{border-color:#fff;border-left-color:#7fd0de;box-shadow:0 0 0 4px rgba(255,255,255,.3)}
+.hero .cmdhint{color:#c0dee6}
+.hero .cmdhint code{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.32);color:#eaf7fa}
+.hero .btn{background:transparent;border-color:rgba(255,255,255,.45);color:#eaf7fa}
+.hero .btn:hover{background:#fff;border-color:#fff;color:var(--deep-2)}
+.hero .btn:focus-visible{outline-color:#fff}
 @media print{.utility,.cmdzone,.heroact,.results,.toast{display:none}.band{padding:18px 0}.band.deep{background:#fff;color:#000}}
 </style>
 </head>
@@ -422,7 +441,7 @@ dl.help dd{margin:3px 0 0;font-size:.86rem;color:var(--ink-2)}
 <script>
 (function(){
 "use strict";
-var VERSION = "Phiên bản 1.4 · 24/11/2026";
+var VERSION = "Phiên bản 1.5 · 24/11/2026";
 var KEY = "cnshts-hub-v1";
 var TONES = ["petrol","amber","indigo","green"];
 
