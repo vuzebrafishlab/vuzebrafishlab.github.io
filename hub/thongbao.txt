@@ -1,0 +1,22 @@
+# ─────────────────────────────────────────────────────────────
+# BẢNG ĐIỀU PHỐI — PHÒNG CNSH THỦY SẢN
+#
+# Cách thêm một thông báo:
+#   • Mỗi thông báo là một khối, các khối cách nhau bằng dòng ---
+#   • Dòng đầu của khối:  ngày | tiêu đề | đối tượng
+#   • Các dòng tiếp theo: nội dung, viết tự do, dùng dấu phẩy thoải mái
+#   • Thông báo mới đặt lên TRÊN CÙNG (ngay dưới phần chú thích này)
+#   • Dòng bắt đầu bằng dấu # là ghi chú, không hiện lên trang
+#
+# Sửa xong bấm Commit, khoảng một phút sau trang sẽ cập nhật.
+# ─────────────────────────────────────────────────────────────
+
+24/11/2026 | Cổng điều phối đã hoạt động | Toàn phòng
+Từ nay chỉ cần nhớ một địa chỉ duy nhất: vuzebrafishlab.github.io/hub
+Gõ lệnh trong ô lệnh hoặc bấm thẳng vào tên hệ thống để mở.
+
+---
+
+24/11/2026 | Nhắc lại quy trình đăng ký thiết bị | Nhân viên
+Đăng ký trên ứng dụng trước khi dùng máy. Sổ giấy chỉ là minh chứng bổ sung, không thay cho việc đăng ký.
+Ca cuối tuần phải được quản lý phòng đồng ý trước.
