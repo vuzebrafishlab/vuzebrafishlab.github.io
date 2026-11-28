@@ -395,6 +395,9 @@ dl.help dd{margin:3px 0 0;font-size:.86rem;color:var(--ink-2)}
       <dt><code>hoi nghi</code> <code>hn2026</code></dt><dd>Mở trang Hội nghị Giống Thủy sản 08/12/2026.</dd>
       <dt><code>bong da</code></dt><dd>Mở trang Giải bóng đá 20/11.</dd>
       <dt><code>web</code> <code>zebrafish</code></dt><dd>Mở website giới thiệu phòng thí nghiệm.</dd>
+      <dt><code>tra cuu tai lieu</code></dt><dd>Mở trợ lý tra cứu & kiểm chứng tài liệu khoa học (PubMed).</dd>
+      <dt><code>thuyet minh</code></dt><dd>Mở trợ lý soạn thuyết minh nhiệm vụ KH&CN.</dd>
+      <dt><code>sinh vien len lab</code></dt><dd>Mở trợ lý lịch sinh viên lên lab.</dd>
       <dt><code>quy dinh</code></dt><dd>Nhảy tới mục quy định đăng ký thiết bị.</dd>
       <dt><code>danh ba</code></dt><dd>Người quản lý từng phòng máy.</dd>
       <dt><code>copy</code></dt><dd>Sao chép toàn bộ danh sách liên kết để gửi cho nhân viên.</dd>
@@ -449,7 +452,7 @@ dl.help dd{margin:3px 0 0;font-size:.86rem;color:var(--ink-2)}
 <script>
 (function(){
 "use strict";
-var VERSION = "Phiên bản 1.7 · 24/11/2026";
+var VERSION = "Phiên bản 1.8 · 28/11/2026";
 var KEY = "cnshts-hub-v1";
 var TONES = ["petrol","amber","indigo","green","sky","rust"];
 
@@ -483,7 +486,22 @@ var DEFAULT_SITES = [
     url:"https://vuzebrafishlab.github.io/", group:"Đối ngoại",
     desc:"Trang công khai giới thiệu hướng nghiên cứu, thành viên và công bố khoa học của phòng thí nghiệm.",
     audience:"Mọi người", extra:"Công khai", cmd:"web",
-    keys:["web","website","trang chu","zebrafish","ca ngua van","gioi thieu","cong bo","thanh vien","nghien cuu","keap1","crispr"] }
+    keys:["web","website","trang chu","zebrafish","ca ngua van","gioi thieu","cong bo","thanh vien","nghien cuu","keap1","crispr"] },
+  { id:"agent-lit", code:"TL", tone:"petrol", name:"Trợ lý tra cứu tài liệu khoa học",
+    url:"https://claude.ai/artifact/2AvMsJKBNwYu9o8jx1BRhX", group:"Trợ lý AI",
+    desc:"Tìm bài báo qua PubMed, tóm tắt bám sát abstract (tự cảnh báo số liệu không có nguồn), kiểm chứng trích dẫn so với PubMed, xuất RIS/BibTeX/CSV. PubMed chưa phủ hết tạp chí tiếng Việt nên “không tìm thấy” không có nghĩa là trích dẫn sai.",
+    audience:"TS. Vũ và nhóm nghiên cứu", extra:"Claude Artifact", cmd:"tra cuu tai lieu",
+    keys:["tra cuu tai lieu","pubmed","bai bao","trich dan","citation","tom tat abstract","kiem chung trich dan","tai lieu khoa hoc","agent 1","agent van ban"] },
+  { id:"agent-thuyetminh", code:"TM", tone:"amber", name:"Trợ lý soạn thuyết minh KH&CN",
+    url:"https://claude.ai/artifact/RBKnmBt4NA6DXDbHiienqe", group:"Trợ lý AI",
+    desc:"Soạn và rà soát thuyết minh nhiệm vụ KH&CN theo TT 39/2025/TT-BKHCN (sửa bởi TT 55/2026), TT 36/2025/TT-BKHCN và QĐ 36/2026/QĐ-UBND TP.HCM — tính thù lao, lập dự toán, kiểm tra tự động trước khi nộp.",
+    audience:"TS. Vũ", extra:"Claude Artifact", cmd:"thuyet minh",
+    keys:["thuyet minh","du toan","nhiem vu khcn","bm-01","bm-02","bm-04","thu lao","cham nhiem","de tai","grant","agent 2"] },
+  { id:"agent-sinhvien", code:"SV", tone:"indigo", name:"Trợ lý lịch sinh viên lên lab",
+    url:"https://claude.ai/artifact/RrWgt7XdPx3Hu1DH48VphD", group:"Trợ lý AI",
+    desc:"Theo dõi sinh viên đăng ký lịch lên lab theo tuần, nhắc hạn đăng ký (trước thứ Bảy), lưu thông tin và đề tài từng sinh viên.",
+    audience:"TS. Vũ", extra:"Claude Artifact", cmd:"sinh vien len lab",
+    keys:["sinh vien len lab","lich lab","dang ky lich","nhiem vu thuong truc","quan ly sinh vien","agent 3"] }
 ];
 
 var state = { sites:DEFAULT_SITES.slice(), size:"md", newsUrl:"" };

@@ -11,6 +11,12 @@
 # Sửa xong bấm Commit, khoảng một phút sau trang sẽ cập nhật.
 # ─────────────────────────────────────────────────────────────
 
+28/11/2026 | Ba trợ lý AI đã lên cổng điều phối | TS. Vũ
+Trợ lý tra cứu tài liệu, trợ lý soạn thuyết minh KH&CN và trợ lý lịch sinh viên lên lab đã rà soát lại để bỏ hết nội dung bịa đặt và nâng cấp, nay có mặt trong mục "Trợ lý AI" trên cổng điều phối.
+Gõ "tra cuu tai lieu", "thuyet minh" hoặc "sinh vien len lab" để mở nhanh.
+
+---
+
 24/11/2026 | Cổng điều phối đã hoạt động | Toàn phòng
 Từ nay chỉ cần nhớ một địa chỉ duy nhất: vuzebrafishlab.github.io/hub
 Gõ lệnh trong ô lệnh hoặc bấm thẳng vào tên hệ thống để mở.
